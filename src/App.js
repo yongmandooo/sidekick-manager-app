@@ -3,6 +3,7 @@ import { ReactComponent as Search } from "./svg/search.svg";
 import Request from "./components/request";
 import requestedData from "./sample_data/requested.json";
 import DetailsModal from "./components/detailsModal";
+import ReportModal from "./components/reportModal";
 
 function App() {
   return (
@@ -49,7 +50,8 @@ function App() {
           />
         );
       })}
-      {/* <DetailsModal /> */}
+      <DetailsModal />
+      <ReportModal />
     </div>
   );
 }
