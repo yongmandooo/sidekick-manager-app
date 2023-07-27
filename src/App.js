@@ -106,7 +106,13 @@ function App() {
           );
         })}
       </div>
-      {currentId != null && <DetailsModal />}
+      {currentId != null && (
+        <DetailsModal
+          currentId={currentId}
+          setCurrentId={setCurrentId}
+          data={content.filter((request) => request.id === currentId)}
+        />
+      )}
     </>
   );
 }

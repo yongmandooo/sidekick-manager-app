@@ -5,7 +5,7 @@ const Request = (props) => {
   const data = props.data;
 
   useEffect(() => {
-    props.setCurrentId(null);
+    props.setCurrentId(props.currentId);
   }, [props]);
 
   let stateContent = null;
@@ -49,7 +49,13 @@ const Request = (props) => {
           {data.manager ? data.manager : "-"}
         </p>
         <div className="flex-1 flex justify-center">
-          <NextActionBtn text="열기" />
+          <NextActionBtn
+            text="열기"
+            onClickFunc={(e) => {
+              e.preventDefault();
+              props.setCurrentId(data.id);
+            }}
+          />
         </div>
       </div>
     </>

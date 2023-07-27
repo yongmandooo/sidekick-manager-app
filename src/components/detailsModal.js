@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NextActionBtn from "./nextActionBtn";
 import AlertBtn from "./alertBtn";
 import AnotherOptionBtn from "./anotherOptionBtn";
 
 const DetailsModal = (props) => {
+  const data = props.data[0];
+  useEffect(() => {
+    props.setCurrentId(props.currentId);
+  }, [props]);
   return (
     <>
       <div className="fixed inset-0 bg-black opacity-50 h-screen w-screen" />
@@ -22,14 +26,16 @@ const DetailsModal = (props) => {
                 <p className="flex-1 flex justify-center">매니저</p>
               </div>
               <div className="flex text-md py-1">
-                <p className="flex-1 flex justify-center">5</p>
-                <p className="flex-1 flex justify-center">남도일</p>
-                <p className="flex-1 flex justify-center">일회성</p>
-                <p className="flex-1 flex justify-center">2023.07.12 11시</p>
-                <p className="flex-1 flex justify-center">2(3)</p>
-                <p className="flex-1 flex justify-center">40,000</p>
-                <p className="flex-1 flex justify-center">예약 완료</p>
-                <p className="flex-1 flex justify-center">-</p>
+                <p className="flex-1 flex justify-center">{data.order}</p>
+                <p className="flex-1 flex justify-center">{data.name}</p>
+                <p className="flex-1 flex justify-center">{data.cyclity}</p>
+                <p className="flex-1 flex justify-center">{data.workDay}</p>
+                <p className="flex-1 flex justify-center">{data.workTime}</p>
+                <p className="flex-1 flex justify-center">{data.price}</p>
+                <p className="flex-1 flex justify-center">{data.state}</p>
+                <p className="flex-1 flex justify-center">
+                  {data.manager ? data.manager : "-"}
+                </p>
               </div>
             </div>
             <div className="flex-auto flex overflow-hidden">
@@ -155,7 +161,13 @@ const DetailsModal = (props) => {
                     <AlertBtn text="작업 취소/환불" />
                     <div className="flex gap-4">
                       <NextActionBtn text="매칭 완료" />
-                      <AnotherOptionBtn text="닫기" />
+                      <AnotherOptionBtn
+                        text="닫기"
+                        onClickFunc={(e) => {
+                          e.preventDefault();
+                          props.setCurrentId(null);
+                        }}
+                      />
                     </div>
                   </div>
                 </div>
