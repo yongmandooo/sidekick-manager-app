@@ -3,7 +3,7 @@ import NextActionBtn from "./nextActionBtn";
 import AlertBtn from "./alertBtn";
 import AnotherOptionBtn from "./anotherOptionBtn";
 
-const DetailsModal = () => {
+const DetailsModal = (props) => {
   return (
     <>
       <div className="fixed inset-0 bg-black opacity-50 h-screen w-screen" />

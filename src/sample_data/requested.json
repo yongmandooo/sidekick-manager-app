@@ -1,12 +1,14 @@
 [
-    {
-        "order": "5",
-        "name": "남도일",
-        "cyclity": "1회성",
-        "workDay": "2023.07.12 11시",
-        "workTime": "2(3)",
-        "price": "40,000",
-        "state": "예약 신청",
-        "manager": "-"
-    }
+  {
+    "id": "5",
+    "order": "5",
+    "name": "남도일",
+    "cyclity": "1회성",
+    "workDay": "2023-07-27 11:00:00",
+    "workTime": "2(3)",
+    "price": "40,000",
+    "state": "reservation-requested",
+    "manager": null,
+    "isReported": false
+  }
 ]
