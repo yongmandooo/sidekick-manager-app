@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import NextActionBtn from "./nextActionBtn";
+import NextActionBtn from "./buttons/nextActionBtn";
 
 const Request = (props) => {
   const data = props.data;

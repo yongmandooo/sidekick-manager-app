@@ -1,5 +1,5 @@
 import React from "react";
-import NextActionBtn from "./nextActionBtn";
+import NextActionBtn from "../../buttons/nextActionBtn";
 import CleaningContent from "./cleaningContent";
 
 const CleaningTable = (props) => {

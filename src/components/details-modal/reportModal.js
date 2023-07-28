@@ -1,6 +1,6 @@
 import React from "react";
-import NextActionBtn from "./nextActionBtn";
-import AnotherOptionBtn from "./anotherOptionBtn";
+import NextActionBtn from "../buttons/nextActionBtn";
+import AnotherOptionBtn from "../buttons/anotherOptionBtn";
 
 const ReportModal = () => {
   return (

@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import CleaningTable from "./cleaningTable";
-import DetailInformation from "./detailInformation";
-import NextActionBtn from "./nextActionBtn";
-import AlertBtn from "./alertBtn";
-import AnotherOptionBtn from "./anotherOptionBtn";
+import CleaningTable from "./cleaning-table/cleaningTable";
+import DetailInformation from "./detail-information/detailInformation";
+import NextActionBtn from "../buttons/nextActionBtn";
+import AlertBtn from "../buttons/alertBtn";
+import AnotherOptionBtn from "../buttons/anotherOptionBtn";
 
 const DetailsModal = (props) => {
   const data = props.data[0];

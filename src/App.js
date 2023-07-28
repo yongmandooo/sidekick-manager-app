@@ -1,7 +1,7 @@
 import "./input.css";
 import { ReactComponent as Search } from "./svg/search.svg";
 import Request from "./components/request";
-import DetailsModal from "./components/detailsModal";
+import DetailsModal from "./components/details-modal/detailsModal";
 import requestedData from "./sample_data/requested.json";
 import managerAllocatedData from "./sample_data/manager-allocated.json";
 import workFinishedData from "./sample_data/work-finished.json";
