@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NextActionBtn from "../buttons/nextActionBtn";
 import AnotherOptionBtn from "../buttons/anotherOptionBtn";
 
-const ReportModal = () => {
+const ReportModal = (props) => {
+  useEffect(() => {
+    props.setIsOpenReportModal(props.isOpenReportModal);
+  }, [props]);
   return (
     <div className="fixed inset-0 h-screen w-screen flex">
       <div className="flex-1" />
@@ -120,7 +123,10 @@ const ReportModal = () => {
             </div>
 
             <div className="pt-12 pb-4 flex flex-row-reverse gap-4">
-              <AnotherOptionBtn text="닫기" />
+              <AnotherOptionBtn
+                text="닫기"
+                onClickFunc={() => props.setIsOpenReportModal(false)}
+              />
               <NextActionBtn text="발행" />
             </div>
           </div>

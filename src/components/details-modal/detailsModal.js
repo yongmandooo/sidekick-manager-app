@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CleaningTable from "./cleaning-table/cleaningTable";
 import DetailInformation from "./detail-information/detailInformation";
 import NextActionBtn from "../buttons/nextActionBtn";
 import AlertBtn from "../buttons/alertBtn";
 import AnotherOptionBtn from "../buttons/anotherOptionBtn";
+import ReportModal from "./reportModal";
 
 const DetailsModal = (props) => {
   const data = props.data[0];
+  const [isOpenReportModal, setIsOpenReportModal] = useState(false);
   useEffect(() => {
     props.setCurrentId(props.currentId);
   }, [props]);
@@ -36,7 +38,12 @@ const DetailsModal = (props) => {
       stateContent = (
         <p className="flex-1 flex justify-center text-[#FF4343]">리포트 대기</p>
       );
-      nextButtonContent = <NextActionBtn text="리포트 작성" />;
+      nextButtonContent = (
+        <NextActionBtn
+          text="리포트 작성"
+          onClickFunc={() => setIsOpenReportModal(true)}
+        />
+      );
     }
   } else if (data.state === "cancelled") {
     stateContent = <p className="flex-1 flex justify-center">작업 취소</p>;
@@ -126,6 +133,12 @@ const DetailsModal = (props) => {
           </div>
         </div>
       </div>
+      {isOpenReportModal && (
+        <ReportModal
+          isOpenReportModal={isOpenReportModal}
+          setIsOpenReportModal={setIsOpenReportModal}
+        />
+      )}
     </>
   );
 };
