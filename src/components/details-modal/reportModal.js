@@ -34,22 +34,32 @@ const ReportModal = (props) => {
               </div>
             </div>
 
-            <p className="text-lg font-bold pb-2">다음 장소 추천</p>
+            <p className="text-lg font-bold pb-2">다음 청소 추천</p>
             <p className="font-bold">다음 번엔 안해도 괜찮아요</p>
             <div className="flex flex-col gap-2 pt-2 pb-4">
               <div className="flex justify-between gap-4">
-                <button className="bg-[#EAEAEA] font-bold px-10 py-1 rounded">
-                  선택
-                </button>
+                <input
+                  className="bg-[#EAEAEA] font-bold px-2 py-1 rounded"
+                  placeholder="청소코드"
+                />
+                <input
+                  className="bg-[#EAEAEA] text-gray-700 rounded px-2"
+                  placeholder="청소 가격"
+                />
                 <input
                   className="grow bg-[#EAEAEA] text-gray-700 rounded px-2"
                   placeholder="추천 이유"
                 />
               </div>
               <div className="flex justify-between gap-4">
-                <button className="bg-[#EAEAEA] font-bold px-10 py-1 rounded">
-                  선택
-                </button>
+                <input
+                  className="bg-[#EAEAEA] font-bold px-2 py-1 rounded"
+                  placeholder="청소코드"
+                />
+                <input
+                  className="bg-[#EAEAEA] text-gray-700 rounded px-2"
+                  placeholder="청소 가격"
+                />
                 <input
                   className="grow bg-[#EAEAEA] text-gray-700 rounded px-2"
                   placeholder="추천 이유"
@@ -59,18 +69,28 @@ const ReportModal = (props) => {
             <p className="font-bold">다음 번에 추가하면 좋아요</p>
             <div className="flex flex-col gap-2 pt-2 pb-4">
               <div className="flex justify-between gap-4">
-                <button className="bg-[#EAEAEA] font-bold px-10 py-1 rounded">
-                  선택
-                </button>
+                <input
+                  className="bg-[#EAEAEA] font-bold px-2 py-1 rounded"
+                  placeholder="청소코드"
+                />
+                <input
+                  className="bg-[#EAEAEA] text-gray-700 rounded px-2"
+                  placeholder="청소 가격"
+                />
                 <input
                   className="grow bg-[#EAEAEA] text-gray-700 rounded px-2"
                   placeholder="추천 이유"
                 />
               </div>
               <div className="flex justify-between gap-4">
-                <button className="bg-[#EAEAEA] font-bold px-10 py-1 rounded">
-                  선택
-                </button>
+                <input
+                  className="bg-[#EAEAEA] font-bold px-2 py-1 rounded"
+                  placeholder="청소코드"
+                />
+                <input
+                  className="bg-[#EAEAEA] text-gray-700 rounded px-2"
+                  placeholder="청소 가격"
+                />
                 <input
                   className="grow bg-[#EAEAEA] text-gray-700 rounded px-2"
                   placeholder="추천 이유"
@@ -80,6 +100,26 @@ const ReportModal = (props) => {
 
             <p className="text-xl font-bold py-4">청소&정리 꿀템 추천</p>
             <div className="flex flex-col gap-2 pb-4">
+              <div className="flex gap-2">
+                <div className="flex-1">
+                  <input
+                    className="w-full bg-[#EAEAEA] text-gray-700 rounded px-2 py-1"
+                    placeholder="이름"
+                  />
+                </div>
+                <div className="flex-[2]">
+                  <input
+                    className="w-full bg-[#EAEAEA] text-gray-700 rounded px-2 py-1"
+                    placeholder="추천 이유"
+                  />
+                </div>
+                <div className="flex-1">
+                  <input
+                    className="w-full bg-[#EAEAEA] text-gray-700 rounded px-2 py-1"
+                    placeholder="링크"
+                  />
+                </div>
+              </div>
               <div className="flex gap-2">
                 <div className="flex-1">
                   <input
