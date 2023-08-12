@@ -22,6 +22,10 @@ function App() {
   } else if (mode === "cancelled") {
     content = cancelledData;
   }
+  content = content.sort(function (a, b) {
+    return a.createTime - b.createTime;
+  });
+
   return (
     <>
       <div className="p-8 h-screen bg-white">
@@ -99,6 +103,7 @@ function App() {
           return (
             <Request
               key={index}
+              order={index}
               data={item}
               currentId={currentId}
               setCurrentId={setCurrentId}

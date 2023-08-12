@@ -3,6 +3,7 @@ import NextActionBtn from "./buttons/nextActionBtn";
 
 const Request = (props) => {
   const data = props.data;
+  const order = props.order + 1;
 
   useEffect(() => {
     props.setCurrentId(props.currentId);
@@ -38,12 +39,16 @@ const Request = (props) => {
   return (
     <>
       <div className="flex py-1 border-b border-gray-600">
-        <p className="flex-1 flex justify-center">{data.order}</p>
+        <p className="flex-1 flex justify-center">{order}</p>
         <p className="flex-1 flex justify-center">{data.name}</p>
         <p className="flex-1 flex justify-center">{data.cyclity}</p>
         <p className="flex-1 flex justify-center">{data.workDay}</p>
-        <p className="flex-1 flex justify-center">{data.workTime}</p>
-        <p className="flex-1 flex justify-center">{data.price}</p>
+        <p className="flex-1 flex justify-center">
+          {data.workTime}({Math.ceil(data.workTime / 60)})
+        </p>
+        <p className="flex-1 flex justify-center">
+          {data.price.toLocaleString()}
+        </p>
         {stateContent}
         <p className="flex-1 flex justify-center">
           {data.manager ? data.manager : "-"}

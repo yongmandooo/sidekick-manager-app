@@ -57,7 +57,6 @@ const DetailsModal = (props) => {
           <div className="flex flex-col border border-black h-[95%] w-[95%]">
             <div className="grow-0 border-b-2 border-black py-4">
               <div className="flex text-lg font-medium py-1">
-                <p className="flex-1 flex justify-center">순번</p>
                 <p className="flex-1 flex justify-center">이름</p>
                 <p className="flex-1 flex justify-center">정기여부</p>
                 <p className="flex-1 flex justify-center">작업일</p>
@@ -67,12 +66,15 @@ const DetailsModal = (props) => {
                 <p className="flex-1 flex justify-center">매니저</p>
               </div>
               <div className="flex text-md py-1">
-                <p className="flex-1 flex justify-center">{data.order}</p>
                 <p className="flex-1 flex justify-center">{data.name}</p>
                 <p className="flex-1 flex justify-center">{data.cyclity}</p>
                 <p className="flex-1 flex justify-center">{data.workDay}</p>
-                <p className="flex-1 flex justify-center">{data.workTime}</p>
-                <p className="flex-1 flex justify-center">{data.price}</p>
+                <p className="flex-1 flex justify-center">
+                  {data.workTime}({Math.ceil(data.workTime / 60)})
+                </p>
+                <p className="flex-1 flex justify-center">
+                  {data.price.toLocaleString()}
+                </p>
                 {stateContent}
                 <p className="flex-1 flex justify-center">
                   {data.manager ? data.manager : "-"}

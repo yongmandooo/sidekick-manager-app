@@ -1,12 +1,13 @@
 [
   {
     "id": "0",
-    "order": "0",
+    "userId": "kym123456",
+    "createTime": "2023-04-12 11:00:00",
     "name": "권용민",
     "cyclity": "1회성",
     "workDay": "2023-07-12 11:00:00",
-    "workTime": "1.5(2.5)",
-    "price": "30,000",
+    "workTime": 90,
+    "price": 30000,
     "state": "cancelled",
     "manager": "개구리",
     "isReported": false,

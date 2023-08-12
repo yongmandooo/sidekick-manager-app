@@ -1,12 +1,13 @@
 [
   {
     "id": "5",
-    "order": "5",
+    "userId": "ndi123456",
+    "createTime": "2023-04-27 11:00:00",
     "name": "남도일",
     "cyclity": "1회성",
     "workDay": "2023-07-27 11:00:00",
-    "workTime": "2(3)",
-    "price": "40,000",
+    "workTime": 140,
+    "price": 40000,
     "state": "reservation-requested",
     "manager": null,
     "isReported": false,
