@@ -15,10 +15,10 @@ const DetailsModal = (props) => {
 
   let stateContent = null;
   let nextButtonContent = null;
-  if (data.state === "reservation-requested") {
+  if (data.state === 1) {
     stateContent = <p className="flex-1 flex justify-center">예약 신청</p>;
     nextButtonContent = <NextActionBtn text="매칭 완료" />;
-  } else if (data.state === "manager-allocated") {
+  } else if (data.state === 2) {
     if (new Date() > new Date(data.workDay)) {
       stateContent = (
         <p className="flex-1 flex justify-center text-[#FF4343]">
@@ -29,23 +29,21 @@ const DetailsModal = (props) => {
     } else {
       stateContent = <p className="flex-1 flex justify-center">매니저 배정</p>;
     }
-  } else if (data.state === "work-finished") {
-    if (data.isReported) {
-      stateContent = (
-        <p className="flex-1 flex justify-center">리포트 발송 완료</p>
-      );
-    } else {
-      stateContent = (
-        <p className="flex-1 flex justify-center text-[#FF4343]">리포트 대기</p>
-      );
-      nextButtonContent = (
-        <NextActionBtn
-          text="리포트 작성"
-          onClickFunc={() => setIsOpenReportModal(true)}
-        />
-      );
-    }
-  } else if (data.state === "cancelled") {
+  } else if (data.state === 3) {
+    stateContent = (
+      <p className="flex-1 flex justify-center">리포트 발송 완료</p>
+    );
+  } else if (data.state === 4) {
+    stateContent = (
+      <p className="flex-1 flex justify-center text-[#FF4343]">리포트 대기</p>
+    );
+    nextButtonContent = (
+      <NextActionBtn
+        text="리포트 작성"
+        onClickFunc={() => setIsOpenReportModal(true)}
+      />
+    );
+  } else if (data.state === 9) {
     stateContent = <p className="flex-1 flex justify-center">작업 취소</p>;
   }
 
@@ -92,19 +90,14 @@ const DetailsModal = (props) => {
                   <DetailInformation details={data.details} />
                   <div className="flex justify-between items-center mb-4">
                     <p className="text-xl font-medium">매니저</p>
-                    {data.state === "reservation-requested" ||
-                    data.state === "manager-allocated" ? (
+                    {data.state === 1 || data.state === 2 ? (
                       <div className="border border-black rounded flex justify-between gap-2 px-2 py-1">
                         <input
                           className="border-none grow"
                           placeholder={data.manager ?? data.manager}
                         ></input>
                         <NextActionBtn
-                          text={
-                            data.state === "reservation-requested"
-                              ? "저장"
-                              : "수정"
-                          }
+                          text={data.state === 1 ? "저장" : "수정"}
                         />
                       </div>
                     ) : (
@@ -112,8 +105,7 @@ const DetailsModal = (props) => {
                     )}
                   </div>
                   <div className="flex justify-between items-center py-6">
-                    {data.state === "reservation-requested" ||
-                    data.state === "manager-allocated" ? (
+                    {data.state === 1 || data.state === 2 ? (
                       <AlertBtn text="작업 취소/환불" />
                     ) : (
                       <div />

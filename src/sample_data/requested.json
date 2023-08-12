@@ -8,7 +8,7 @@
     "workDay": "2023-07-27 11:00:00",
     "workTime": 140,
     "price": 40000,
-    "state": "reservation-requested",
+    "state": 1,
     "manager": null,
     "isReported": false,
     "cleaningList": {

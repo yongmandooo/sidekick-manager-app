@@ -8,9 +8,8 @@
     "workDay": "2023-07-12 11:00:00",
     "workTime": 90,
     "price": 30000,
-    "state": "cancelled",
+    "state": 9,
     "manager": "개구리",
-    "isReported": false,
     "cleaningContents": [],
     "details": {
       "contact": "010-1234-1234",

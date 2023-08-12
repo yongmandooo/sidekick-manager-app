@@ -25,18 +25,13 @@ const CleaningTable = (props) => {
         <div>
           <div className="flex justify-between py-2 items-center">
             <div className="font-bold">미션</div>
-            {props.state === "reservation-requested" ||
-            props.state === "manager-allocated" ? (
+            {props.state === 1 || props.state === 2 ? (
               <div className="border border-black rounded flex justify-between gap-2 px-2 py-1 w-3/4">
                 <input
                   className="border-none grow"
                   placeholder={props.mission ?? props.mission}
                 ></input>
-                <NextActionBtn
-                  text={
-                    props.state === "reservation-requested" ? "저장" : "수정"
-                  }
-                />
+                <NextActionBtn text={props.state === 1 ? "저장" : "수정"} />
               </div>
             ) : (
               <div className="border-b border-black">

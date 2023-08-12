@@ -10,9 +10,9 @@ const Request = (props) => {
   }, [props]);
 
   let stateContent = null;
-  if (data.state === "reservation-requested") {
+  if (data.state === 1) {
     stateContent = <p className="flex-1 flex justify-center">예약 신청</p>;
-  } else if (data.state === "manager-allocated") {
+  } else if (data.state === 2) {
     if (new Date() > new Date(data.workDay)) {
       stateContent = (
         <p className="flex-1 flex justify-center text-[#FF4343]">
@@ -22,17 +22,15 @@ const Request = (props) => {
     } else {
       stateContent = <p className="flex-1 flex justify-center">매니저 배정</p>;
     }
-  } else if (data.state === "work-finished") {
-    if (data.isReported) {
-      stateContent = (
-        <p className="flex-1 flex justify-center">리포트 발송 완료</p>
-      );
-    } else {
-      stateContent = (
-        <p className="flex-1 flex justify-center text-[#FF4343]">리포트 대기</p>
-      );
-    }
-  } else if (data.state === "cancelled") {
+  } else if (data.state === 3) {
+    stateContent = (
+      <p className="flex-1 flex justify-center">리포트 발송 완료</p>
+    );
+  } else if (data.state === 4) {
+    stateContent = (
+      <p className="flex-1 flex justify-center text-[#FF4343]">리포트 대기</p>
+    );
+  } else if (data.state === 9) {
     stateContent = <p className="flex-1 flex justify-center">작업 취소</p>;
   }
 
