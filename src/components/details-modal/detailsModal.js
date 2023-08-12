@@ -83,7 +83,7 @@ const DetailsModal = (props) => {
             </div>
             <div className="flex-auto flex overflow-hidden">
               <CleaningTable
-                cleaningContents={data.cleaningContents}
+                cleaningList={data.cleaningList}
                 mission={data.mission}
                 state={data.state}
               />

@@ -11,21 +11,82 @@
     "state": "reservation-requested",
     "manager": null,
     "isReported": false,
-    "cleaningContents": [
-      { "space": "화장실", "todo": ["화장실 기본 청소, 2개"] },
-      {
-        "space": "주방",
-        "todo": [
-          "주방 간단 정리",
-          "설거지",
-          "싱크대 및 주방 배수구",
-          "주방 선반 및 벽 기름 때",
-          "화구 기름 때"
-        ]
-      },
-      { "space": "방/거실", "todo": ["방/거실 간단 정리", "기본 바닥 청소"] },
-      { "space": "기타", "todo": ["빨래", "일반&재활용 쓰레기 처리"] }
-    ],
+    "cleaningList": {
+      "bathroom": [
+        {
+          "name": "화장실 기본 청소",
+          "count": 2,
+          "cost": 25600,
+          "duration": 75
+        },
+        {
+          "name": "화장실 선반 내부 청소",
+          "count": 2,
+          "cost": 19800,
+          "duration": 60
+        }
+      ],
+      "kitchen": [
+        {
+          "name": "주방 간단 정리",
+          "count": 2,
+          "cost": 25600,
+          "duration": 75
+        },
+        {
+          "name": "설거지",
+          "count": 2,
+          "cost": 19800,
+          "duration": 60
+        },
+        {
+          "name": "싱크대 및 주방 배수구",
+          "count": 2,
+          "cost": 19800,
+          "duration": 60
+        },
+        {
+          "name": "주방 선반 및 벽 기름 때",
+          "count": 2,
+          "cost": 19800,
+          "duration": 60
+        },
+        {
+          "name": "화구 기름 때",
+          "count": 2,
+          "cost": 19800,
+          "duration": 60
+        }
+      ],
+      "livingroom": [
+        {
+          "name": "방/거실 간단 정리",
+          "count": 2,
+          "cost": 25600,
+          "duration": 75
+        },
+        {
+          "name": "기본 바닥 청소",
+          "count": 2,
+          "cost": 19800,
+          "duration": 60
+        }
+      ],
+      "etc": [
+        {
+          "name": "빨래",
+          "count": 2,
+          "cost": 25600,
+          "duration": 75
+        },
+        {
+          "name": "일반&재활용 쓰레기 처리",
+          "count": 2,
+          "cost": 19800,
+          "duration": 60
+        }
+      ]
+    },
     "details": {
       "contact": "010-1234-1234",
       "address": "서울특별시 관악구 남부순환로 1080, 612호",

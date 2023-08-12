@@ -3,19 +3,25 @@ import NextActionBtn from "../../buttons/nextActionBtn";
 import CleaningContent from "./cleaningContent";
 
 const CleaningTable = (props) => {
-  const cleaningContents = props.cleaningContents;
-  console.log(props.mission);
+  const cleaningList = props.cleaningList;
   return (
     <div className="flex-1 border-r-2 border-black">
       <div className="px-8 pb-8 h-full overflow-y-scroll">
         <p className="text-xl font-bold py-4">청소 항목</p>
-        {cleaningContents.map((item, index) => (
-          <CleaningContent
-            key={index}
-            cleaningSpace={item.space}
-            cleaningTodo={item.todo}
-          />
-        ))}
+        {cleaningList &&
+          Object.keys(cleaningList).map((key, index) => {
+            if (cleaningList[key].length > 0) {
+              return (
+                <CleaningContent
+                  key={index}
+                  cleaningSpace={key}
+                  cleaningTodo={cleaningList[key]}
+                />
+              );
+            } else {
+              return <></>;
+            }
+          })}
         <div>
           <div className="flex justify-between py-2 items-center">
             <div className="font-bold">미션</div>
