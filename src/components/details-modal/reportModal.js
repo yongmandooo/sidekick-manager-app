@@ -43,10 +43,6 @@ const ReportModal = (props) => {
                   placeholder="청소코드"
                 />
                 <input
-                  className="bg-[#EAEAEA] text-gray-700 rounded px-2"
-                  placeholder="청소 가격"
-                />
-                <input
                   className="grow bg-[#EAEAEA] text-gray-700 rounded px-2"
                   placeholder="추천 이유"
                 />
@@ -55,10 +51,6 @@ const ReportModal = (props) => {
                 <input
                   className="bg-[#EAEAEA] font-bold px-2 py-1 rounded"
                   placeholder="청소코드"
-                />
-                <input
-                  className="bg-[#EAEAEA] text-gray-700 rounded px-2"
-                  placeholder="청소 가격"
                 />
                 <input
                   className="grow bg-[#EAEAEA] text-gray-700 rounded px-2"
@@ -74,10 +66,6 @@ const ReportModal = (props) => {
                   placeholder="청소코드"
                 />
                 <input
-                  className="bg-[#EAEAEA] text-gray-700 rounded px-2"
-                  placeholder="청소 가격"
-                />
-                <input
                   className="grow bg-[#EAEAEA] text-gray-700 rounded px-2"
                   placeholder="추천 이유"
                 />
@@ -86,10 +74,6 @@ const ReportModal = (props) => {
                 <input
                   className="bg-[#EAEAEA] font-bold px-2 py-1 rounded"
                   placeholder="청소코드"
-                />
-                <input
-                  className="bg-[#EAEAEA] text-gray-700 rounded px-2"
-                  placeholder="청소 가격"
                 />
                 <input
                   className="grow bg-[#EAEAEA] text-gray-700 rounded px-2"
