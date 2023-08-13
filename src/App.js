@@ -6,26 +6,46 @@ import requestedData from "./sample_data/requested.json";
 import managerAllocatedData from "./sample_data/manager-allocated.json";
 import workFinishedData from "./sample_data/work-finished.json";
 import cancelledData from "./sample_data/cancelled.json";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function App() {
   const [mode, setMode] = useState("requested");
   const [currentId, setCurrentId] = useState(null);
+  const [content, setContent] = useState(null);
+  let initContent = useRef(null);
 
-  let content = null;
-  if (mode === "requested") {
-    content = requestedData;
-  } else if (mode === "manager-allocated") {
-    content = managerAllocatedData;
-  } else if (mode === "work-finished") {
-    content = workFinishedData;
-  } else if (mode === "cancelled") {
-    content = cancelledData;
-  }
-  content = content.sort(function (a, b) {
-    return a.createTime - b.createTime;
-  });
+  useEffect(()=>{
+    let temp = null;
+    if (mode === "requested") {
+      temp = requestedData;
+    } else if (mode === "manager-allocated") {
+      temp = managerAllocatedData;
+    } else if (mode === "work-finished") {
+      temp = workFinishedData;
+    } else if (mode === "cancelled") {
+      temp = cancelledData;
+    }
+    initContent.current = temp.sort(function (a, b) {
+      return a.createTime - b.createTime;
+    });
+    setContent(initContent.current);
+  }, [mode]) //mode 변경마다 initContent를 초기화
 
+  const isSameDate = (date1, date2) => {
+    return date1.getFullYear() === date2.getFullYear()
+       && date1.getMonth() === date2.getMonth()
+       && date1.getDate() === date2.getDate();
+  } //시간을 제외한 날짜 비교 함수
+
+  const onTextChange = e => {
+    if(e.target.value === "" || e.target.value === null){
+      setContent(initContent.current);
+    } else {
+      setContent(initContent.current.filter(v => {
+        return (v.name.includes(e.target.value) || isSameDate(new Date(e.target.value), new Date(v.workDay)))
+      }))
+    }
+  } //검색 텍스트 변경마다 content 필터링
   return (
     <>
       <div className="p-8 h-screen bg-white">
@@ -84,6 +104,7 @@ function App() {
               type="text"
               className="text-gray-700 bg-gray-200"
               placeholder="이름, 작업일로 검색"
+              onChange={onTextChange}
             />
             <Search />
           </div>
@@ -99,7 +120,7 @@ function App() {
           <p className="flex-1 flex justify-center">매니저</p>
           <p className="flex-1 flex justify-center">세부 내용 확인</p>
         </div>
-        {content.map((item, index) => {
+        {content && content.map((item, index) => {
           return (
             <Request
               key={index}
