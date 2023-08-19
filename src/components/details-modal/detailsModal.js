@@ -5,13 +5,59 @@ import NextActionBtn from "../buttons/nextActionBtn";
 import AlertBtn from "../buttons/alertBtn";
 import AnotherOptionBtn from "../buttons/anotherOptionBtn";
 import ReportModal from "./reportModal";
+import axios from "axios";
 
 const DetailsModal = (props) => {
-  const data = props.data[0];
+  const [data, setData] = useState({});
   const [isOpenReportModal, setIsOpenReportModal] = useState(false);
   useEffect(() => {
     props.setCurrentId(props.currentId);
+    getCleaningSessionDetails(props.currentId);
   }, [props]);
+
+  const getCleaningSessionDetails = async (currentId) => {
+    await axios({
+      method: "get",
+      url: `http://localhost:8080/api/admin/cleaning_session`,
+      params: {
+        cleaning_session_id: currentId,
+      },
+    })
+      .then(function (response) {
+        console.log(response.data);
+        setData(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const daysStringify = (days) => {
+    let str = "";
+    for (var i = 0; i < days.length; i++) {
+      if (days[i] === 0) {
+        str += "월요일";
+      } else if (days[i] === 1) {
+        str += "화요일";
+      } else if (days[i] === 2) {
+        str += "수요일";
+      } else if (days[i] === 3) {
+        str += "목요일";
+      } else if (days[i] === 4) {
+        str += "금요일";
+      } else if (days[i] === 5) {
+        str += "토요일";
+      } else if (days[i] === 6) {
+        str += "일요일";
+      }
+
+      if (i !== days.length - 1) {
+        str += ", ";
+      }
+    }
+
+    return str;
+  };
 
   let stateContent = null;
   let nextButtonContent = null;
@@ -64,14 +110,24 @@ const DetailsModal = (props) => {
                 <p className="flex-1 flex justify-center">매니저</p>
               </div>
               <div className="flex text-md py-1">
-                <p className="flex-1 flex justify-center">{data.name}</p>
-                <p className="flex-1 flex justify-center">{data.cyclity}</p>
-                <p className="flex-1 flex justify-center">{data.workDay}</p>
+                <p className="flex-1 flex justify-center">{data.username}</p>
                 <p className="flex-1 flex justify-center">
-                  {data.workTime}({Math.ceil(data.workTime / 60)})
+                  {data.regular_cleaning &&
+                    (data.regular_cleaning.is_regular
+                      ? (data.regular_cleaning.interval_week
+                          ? "격주 "
+                          : "매주 ") +
+                        daysStringify(data.regular_cleaning.interval_weekdays)
+                      : "1회성")}
                 </p>
                 <p className="flex-1 flex justify-center">
-                  {data.price.toLocaleString()}
+                  {data.visit_timestamp}
+                </p>
+                <p className="flex-1 flex justify-center">
+                  {data.sum_duration}({Math.ceil(data.sum_duration / 60)})
+                </p>
+                <p className="flex-1 flex justify-center">
+                  {data.sell_price?.toLocaleString()}
                 </p>
                 {stateContent}
                 <p className="flex-1 flex justify-center">
@@ -81,13 +137,14 @@ const DetailsModal = (props) => {
             </div>
             <div className="flex-auto flex overflow-hidden">
               <CleaningTable
-                cleaningList={data.cleaningList}
-                mission={data.mission}
+                key={props.currentId}
+                cleaningList={data.cleaning_list}
+                mission={data.missions}
                 state={data.state}
               />
               <div className="flex-1">
                 <div className="py-8 px-6">
-                  <DetailInformation details={data.details} />
+                  <DetailInformation details={data} />
                   <div className="flex justify-between items-center mb-4">
                     <p className="text-xl font-medium">매니저</p>
                     {data.state === 1 || data.state === 2 ? (

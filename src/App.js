@@ -2,11 +2,7 @@ import "./input.css";
 import { ReactComponent as Search } from "./svg/search.svg";
 import Request from "./components/request";
 import DetailsModal from "./components/details-modal/detailsModal";
-import requestedData from "./sample_data/requested.json";
-import managerAllocatedData from "./sample_data/manager-allocated.json";
-import workFinishedData from "./sample_data/work-finished.json";
-import cancelledData from "./sample_data/cancelled.json";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 
 function App() {
@@ -16,21 +12,17 @@ function App() {
   let initContent = useRef(null);
 
   useEffect(() => {
-    getCleaningSessions([1]);
-    let temp = null;
+    let temp = [];
     if (mode === "requested") {
-      temp = requestedData;
+      temp = [1];
     } else if (mode === "manager-allocated") {
-      temp = managerAllocatedData;
+      temp = [2];
     } else if (mode === "work-finished") {
-      temp = workFinishedData;
+      temp = [3, 4];
     } else if (mode === "cancelled") {
-      temp = cancelledData;
+      temp = [9];
     }
-    initContent.current = temp.sort(function (a, b) {
-      return a.createTime - b.createTime;
-    });
-    setContent(initContent.current);
+    getCleaningSessions(temp);
   }, [mode]); //mode 변경마다 initContent를 초기화
 
   const getCleaningSessions = async (stateList) => {
@@ -42,7 +34,10 @@ function App() {
       },
     })
       .then(function (response) {
-        console.log(response.data);
+        initContent.current = response.data.sort((a, b) => {
+          return a.createTime - b.createTime;
+        });
+        setContent(initContent.current);
       })
       .catch(function (error) {
         console.log(error);
@@ -64,7 +59,7 @@ function App() {
       setContent(
         initContent.current.filter((v) => {
           return (
-            v.name.includes(e.target.value) ||
+            v.username.includes(e.target.value) ||
             isSameDate(new Date(e.target.value), new Date(v.workDay))
           );
         })
@@ -158,12 +153,8 @@ function App() {
             );
           })}
       </div>
-      {currentId != null && (
-        <DetailsModal
-          currentId={currentId}
-          setCurrentId={setCurrentId}
-          data={content.filter((request) => request.id === currentId)}
-        />
+      {currentId && (
+        <DetailsModal currentId={currentId} setCurrentId={setCurrentId} />
       )}
     </>
   );

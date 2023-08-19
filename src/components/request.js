@@ -13,7 +13,7 @@ const Request = (props) => {
   if (data.state === 1) {
     stateContent = <p className="flex-1 flex justify-center">예약 신청</p>;
   } else if (data.state === 2) {
-    if (new Date() > new Date(data.workDay)) {
+    if (new Date() > new Date(data.visit_timestamp)) {
       stateContent = (
         <p className="flex-1 flex justify-center text-[#FF4343]">
           작업 시간 종료
@@ -38,14 +38,14 @@ const Request = (props) => {
     <>
       <div className="flex py-1 border-b border-gray-600">
         <p className="flex-1 flex justify-center">{order}</p>
-        <p className="flex-1 flex justify-center">{data.name}</p>
-        <p className="flex-1 flex justify-center">{data.cyclity}</p>
-        <p className="flex-1 flex justify-center">{data.workDay}</p>
+        <p className="flex-1 flex justify-center">{data.username}</p>
+        <p className="flex-1 flex justify-center">{data.is_regular ? "O" : "X"}</p>
+        <p className="flex-1 flex justify-center">{data.visit_timestamp}</p>
         <p className="flex-1 flex justify-center">
-          {data.workTime}({Math.ceil(data.workTime / 60)})
+          {data.sum_duration}({Math.ceil(data.sum_duration / 60)})
         </p>
         <p className="flex-1 flex justify-center">
-          {data.price.toLocaleString()}
+          {data.sell_price.toLocaleString()}
         </p>
         {stateContent}
         <p className="flex-1 flex justify-center">
@@ -56,7 +56,7 @@ const Request = (props) => {
             text="열기"
             onClickFunc={(e) => {
               e.preventDefault();
-              props.setCurrentId(data.id);
+              props.setCurrentId(data.cleaning_session_id);
             }}
           />
         </div>
