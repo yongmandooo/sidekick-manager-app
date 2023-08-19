@@ -264,6 +264,7 @@ const DetailsModal = (props) => {
       </div>
       {isOpenReportModal && (
         <ReportModal
+          currentId={props.currentId}
           isOpenReportModal={isOpenReportModal}
           setIsOpenReportModal={setIsOpenReportModal}
         />
