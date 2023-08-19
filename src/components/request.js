@@ -22,11 +22,11 @@ const Request = (props) => {
     } else {
       stateContent = <p className="flex-1 flex justify-center">매니저 배정</p>;
     }
-  } else if (data.state === 3) {
+  } else if (data.state === 4) {
     stateContent = (
       <p className="flex-1 flex justify-center">리포트 발송 완료</p>
     );
-  } else if (data.state === 4) {
+  } else if (data.state === 3) {
     stateContent = (
       <p className="flex-1 flex justify-center text-[#FF4343]">리포트 대기</p>
     );
@@ -39,13 +39,15 @@ const Request = (props) => {
       <div className="flex py-1 border-b border-gray-600">
         <p className="flex-1 flex justify-center">{order}</p>
         <p className="flex-1 flex justify-center">{data.username}</p>
-        <p className="flex-1 flex justify-center">{data.is_regular ? "O" : "X"}</p>
+        <p className="flex-1 flex justify-center">
+          {data.is_regular ? "O" : "X"}
+        </p>
         <p className="flex-1 flex justify-center">{data.visit_timestamp}</p>
         <p className="flex-1 flex justify-center">
           {data.sum_duration}({Math.ceil(data.sum_duration / 60)})
         </p>
         <p className="flex-1 flex justify-center">
-          {data.sell_price.toLocaleString()}
+          {data.sell_price?.toLocaleString()}
         </p>
         {stateContent}
         <p className="flex-1 flex justify-center">

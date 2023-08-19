@@ -6,7 +6,9 @@ import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 
 function App() {
-  const [mode, setMode] = useState("requested");
+  const [mode, setMode] = useState(
+    localStorage.getItem("session-mode") ?? "requested"
+  );
   const [currentId, setCurrentId] = useState(null);
   const [content, setContent] = useState(null);
   let initContent = useRef(null);
@@ -34,6 +36,12 @@ function App() {
       },
     })
       .then(function (response) {
+        for (let session of response.data) {
+          if (session.visit_timestamp) {
+            session.visit_timestamp = session.visit_timestamp.substr(0, 19);
+            session.visit_timestamp = session.visit_timestamp.replace("T", " ");
+          }
+        }
         initContent.current = response.data.sort((a, b) => {
           return a.createTime - b.createTime;
         });
@@ -79,6 +87,7 @@ function App() {
               onClick={(e) => {
                 e.preventDefault();
                 setMode("requested");
+                localStorage.setItem("session-mode", "requested");
               }}
             >
               예약 신청
@@ -91,6 +100,7 @@ function App() {
               onClick={(e) => {
                 e.preventDefault();
                 setMode("manager-allocated");
+                localStorage.setItem("session-mode", "manager-allocated");
               }}
             >
               예약 확정
@@ -103,6 +113,7 @@ function App() {
               onClick={(e) => {
                 e.preventDefault();
                 setMode("work-finished");
+                localStorage.setItem("session-mode", "work-finished");
               }}
             >
               작업 완료
@@ -114,6 +125,7 @@ function App() {
               onClick={(e) => {
                 e.preventDefault();
                 setMode("cancelled");
+                localStorage.setItem("session-mode", "cancelled");
               }}
             >
               취소된 작업

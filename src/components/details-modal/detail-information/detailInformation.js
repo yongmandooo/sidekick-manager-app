@@ -2,23 +2,40 @@ import React from "react";
 
 const DetailInformation = (props) => {
   const info = props.details;
+  const housePetsStringify = (arr) => {
+    let str = "";
+    if (arr.indexOf(0) >= 0) {
+      str += "반려동물 없음";
+      return str;
+    }
+    if (arr.indexOf(1) >= 0) {
+      str += "강아지 있음. ";
+    }
+    if (arr.indexOf(2) >= 0) {
+      str += "고양이 있음. ";
+    }
+    if (arr.indexOf(3) >= 0) {
+      str += "기타 반려동물 있음. ";
+    }
+    return str;
+  };
   return (
     <>
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-start mb-4">
         <p className="text-xl font-medium">연락처</p>
-        <p>{info.phone ?? "없음"}</p>
+        <p className="max-w-[70%]">{info.phone ?? "없음"}</p>
       </div>
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-start mb-4">
         <p className="text-xl font-medium">주소</p>
-        <p>{info.house_address ?? "없음"}</p>
+        <p className="max-w-[70%]">{info.house_address ?? "없음"}</p>
       </div>
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-start mb-4">
         <p className="text-xl font-medium">평수</p>
-        <p>{info.house_size ?? "없음"}</p>
+        <p className="max-w-[70%]">{info.house_size ?? "없음"}</p>
       </div>
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-start mb-4">
         <p className="text-xl font-medium">출입 방법</p>
-        <p>
+        <p className="max-w-[70%]">
           {info.house_visit &&
             (info.house_visit.method === "비밀번호"
               ? "공동현관: " +
@@ -29,26 +46,26 @@ const DetailInformation = (props) => {
               : info.house_visit.option)}
         </p>
       </div>
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-start mb-4">
         <p className="text-xl font-medium">상세 정보</p>
-        <p>
+        <p className="max-w-[70%]">
           {info.house_babies || info.house_pets
             ? (info.house_babies ? "영유아 있음 " : "") +
-              (info.house_pets ? "반려동물 있음" : "")
+              (info.house_pets && housePetsStringify(info.house_pets))
             : "없음"}
         </p>
       </div>
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-start mb-4">
         <p className="text-xl font-medium">주의 사항</p>
-        <p>{info.house_caution ?? "없음"}</p>
+        <p className="max-w-[70%]">{info.house_caution ?? "없음"}</p>
       </div>
-      {/* <div className="flex justify-between items-center mb-4">
+      {/* <div className="flex justify-between items-start mb-4">
         <p className="text-xl font-medium">쓰레기 배출</p>
-        <p>{"없음"}</p>
+        <p className="max-w-[70%]">{"없음"}</p>
       </div> */}
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-start mb-4">
         <p className="text-xl font-medium">청소도구</p>
-        <p>
+        <p className="max-w-[70%]">
           {info.house_tools
             ? "진공청소기: " +
               (info.house_tools.vaccum_cleaner ?? "없음") +
@@ -64,9 +81,9 @@ const DetailInformation = (props) => {
             : "없음"}
         </p>
       </div>
-      {/* <div className="flex justify-between items-center mb-4">
+      {/* <div className="flex justify-between items-start mb-4">
         <p className="text-xl font-medium">매니저 준비 도구</p>
-        <p>{"없음"}</p>
+        <p className="max-w-[70%]">{"없음"}</p>
       </div> */}
     </>
   );

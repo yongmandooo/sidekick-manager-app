@@ -10,6 +10,7 @@ import axios from "axios";
 const DetailsModal = (props) => {
   const [data, setData] = useState({});
   const [isOpenReportModal, setIsOpenReportModal] = useState(false);
+  const [manager, setManager] = useState("");
   useEffect(() => {
     props.setCurrentId(props.currentId);
     getCleaningSessionDetails(props.currentId);
@@ -24,8 +25,52 @@ const DetailsModal = (props) => {
       },
     })
       .then(function (response) {
+        if (response.data.visit_timestamp) {
+          response.data.visit_timestamp = response.data.visit_timestamp.substr(
+            0,
+            19
+          );
+          response.data.visit_timestamp = response.data.visit_timestamp.replace(
+            "T",
+            " "
+          );
+        }
         console.log(response.data);
         setData(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const saveManager = async (managerName) => {
+    await axios({
+      method: "put",
+      url: `http://localhost:8080/api/admin/manager`,
+      data: {
+        cleaning_session_id: props.currentId,
+        manager: managerName,
+      },
+    })
+      .then(function (response) {
+        console.log(response.status);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const changeState = async (stateNum) => {
+    await axios({
+      method: "put",
+      url: `http://localhost:8080/api/admin/state`,
+      data: {
+        cleaning_session_id: props.currentId,
+        state: stateNum,
+      },
+    })
+      .then(function (response) {
+        console.log(response.status);
       })
       .catch(function (error) {
         console.log(error);
@@ -63,23 +108,42 @@ const DetailsModal = (props) => {
   let nextButtonContent = null;
   if (data.state === 1) {
     stateContent = <p className="flex-1 flex justify-center">예약 신청</p>;
-    nextButtonContent = <NextActionBtn text="매칭 완료" />;
+    nextButtonContent = (
+      <NextActionBtn
+        text="매칭 완료"
+        onClickFunc={(e) => {
+          e.preventDefault();
+          changeState(2);
+          window.location.reload();
+        }}
+      />
+    );
   } else if (data.state === 2) {
-    if (new Date() > new Date(data.workDay)) {
+    console.log(new Date(data.visit_timestamp));
+    if (new Date() > new Date(data.visit_timestamp)) {
       stateContent = (
         <p className="flex-1 flex justify-center text-[#FF4343]">
           작업 시간 종료
         </p>
       );
-      nextButtonContent = <NextActionBtn text="작업 완료" />;
+      nextButtonContent = (
+        <NextActionBtn
+          text="작업 완료"
+          onClickFunc={(e) => {
+            e.preventDefault();
+            changeState(3);
+            window.location.reload();
+          }}
+        />
+      );
     } else {
       stateContent = <p className="flex-1 flex justify-center">매니저 배정</p>;
     }
-  } else if (data.state === 3) {
+  } else if (data.state === 4) {
     stateContent = (
       <p className="flex-1 flex justify-center">리포트 발송 완료</p>
     );
-  } else if (data.state === 4) {
+  } else if (data.state === 3) {
     stateContent = (
       <p className="flex-1 flex justify-center text-[#FF4343]">리포트 대기</p>
     );
@@ -138,6 +202,7 @@ const DetailsModal = (props) => {
             <div className="flex-auto flex overflow-hidden">
               <CleaningTable
                 key={props.currentId}
+                currentId={props.currentId}
                 cleaningList={data.cleaning_list}
                 mission={data.missions}
                 state={data.state}
@@ -152,9 +217,15 @@ const DetailsModal = (props) => {
                         <input
                           className="border-none grow"
                           placeholder={data.manager ?? data.manager}
+                          onChange={(e) => setManager(e.target.value)}
                         ></input>
                         <NextActionBtn
                           text={data.state === 1 ? "저장" : "수정"}
+                          onClickFunc={(e) => {
+                            e.preventDefault();
+                            saveManager(manager);
+                            window.location.reload();
+                          }}
                         />
                       </div>
                     ) : (
@@ -163,7 +234,14 @@ const DetailsModal = (props) => {
                   </div>
                   <div className="flex justify-between items-center py-6">
                     {data.state === 1 || data.state === 2 ? (
-                      <AlertBtn text="작업 취소/환불" />
+                      <AlertBtn
+                        text="작업 취소/환불"
+                        onClickFunc={(e) => {
+                          e.preventDefault();
+                          changeState(9);
+                          window.location.reload();
+                        }}
+                      />
                     ) : (
                       <div />
                     )}
