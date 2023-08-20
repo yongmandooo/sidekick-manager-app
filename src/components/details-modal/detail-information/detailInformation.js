@@ -59,10 +59,14 @@ const DetailInformation = (props) => {
         <p className="text-xl font-medium">주의 사항</p>
         <p className="max-w-[70%]">{info.house_caution ?? "없음"}</p>
       </div>
-      {/* <div className="flex justify-between items-start mb-4">
+      <div className="flex justify-between items-start mb-4">
         <p className="text-xl font-medium">쓰레기 배출</p>
-        <p className="max-w-[70%]">{"없음"}</p>
-      </div> */}
+        <p className="max-w-[70%]">
+          {info.house_tools
+            ? info.house_tools.garbage_disposal ?? "없음"
+            : "없음"}
+        </p>
+      </div>
       <div className="flex justify-between items-start mb-4">
         <p className="text-xl font-medium">청소도구</p>
         <p className="max-w-[70%]">
@@ -75,9 +79,7 @@ const DetailInformation = (props) => {
               ", " +
               "화장실 청소 솔: " +
               (info.house_tools.toilet_brush ?? "없음") +
-              ", " +
-              "쓰레기 봉투: " +
-              (info.house_tools.garbage_disposal ?? "없음")
+              ", "
             : "없음"}
         </p>
       </div>
