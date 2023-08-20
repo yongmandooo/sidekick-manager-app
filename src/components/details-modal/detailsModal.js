@@ -153,6 +153,8 @@ const DetailsModal = (props) => {
         onClickFunc={() => setIsOpenReportModal(true)}
       />
     );
+  } else if (data.state === 8) {
+    stateContent = <p className="flex-1 flex justify-center">환불 필요</p>;
   } else if (data.state === 9) {
     stateContent = <p className="flex-1 flex justify-center">작업 취소</p>;
   }

@@ -22,7 +22,7 @@ function App() {
     } else if (mode === "work-finished") {
       temp = [3, 4];
     } else if (mode === "cancelled") {
-      temp = [9];
+      temp = [8, 9];
     }
     getCleaningSessions(temp);
   }, [mode]); //mode 변경마다 initContent를 초기화

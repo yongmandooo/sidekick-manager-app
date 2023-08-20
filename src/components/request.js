@@ -30,6 +30,8 @@ const Request = (props) => {
     stateContent = (
       <p className="flex-1 flex justify-center text-[#FF4343]">리포트 대기</p>
     );
+  } else if (data.state === 8) {
+    stateContent = <p className="flex-1 flex justify-center">환불 필요</p>;
   } else if (data.state === 9) {
     stateContent = <p className="flex-1 flex justify-center">작업 취소</p>;
   }
